@@ -1,0 +1,183 @@
+# 🧰 Git — Tabelas de Comandos e Flags (cola rápida)
+
+Guia compacto com **comandos principais do Git** e suas **flags com hífen (-)**.
+---
+
+## 📦 Repositório & Configuração
+
+| Comando | Flags comuns | Para que serve | Exemplo |
+|---|---|---|---|
+| `git init` | `-b <nome>` | Inicia repo (define branch inicial) | `git init -b main` |
+| `git clone <url>` | `-b <branch>`, `--depth 1`, `--single-branch` | Clona repositório | `git clone -b develop --depth 1 <url>` |
+| `git config` | `--global`, `-l`, `--list` | Configura usuário/opções | `git config --global user.name "Seu Nome"` |
+| `git remote` | `-v` | Lista remotos detalhados | `git remote -v` |
+| `git remote add` | — | Adiciona remoto | `git remote add origin <url>` |
+| `git remote set-url` | — | Troca URL do remoto | `git remote set-url origin <nova-url>` |
+
+---
+
+## ✍️ Staging & Commits
+
+| Comando | Flags comuns | Para que serve | Exemplo |
+|---|---|---|---|
+| `git status` | `-s`, `-b` | Status curto + branch | `git status -sb` |
+| `git add` | `-A`, `-p`, `-N` | Adiciona mudanças (all/patch/intent) | `git add -A` · `git add -p` |
+| `git restore` | `--staged`, `-p` | Desfaz staging/patch | `git restore --staged arquivo.java` |
+| `git rm` | `-r`, `--cached`, `-f` | Remove arquivo (ou só do índice) | `git rm --cached .env` |
+| `git mv` | — | Move/renomeia arquivo | `git mv Antigo.java Novo.java` |
+| `git commit` | `-m`, `-a`, `--amend`, `-S` | Commit; inclui rastreados; emenda; assina | `git commit -a -m "feat: x"` |
+
+---
+
+## 🌿 Branches
+
+| Comando | Flags comuns | Para que serve | Exemplo |
+|---|---|---|---|
+| `git branch` | `-a`, `-d`, `-D`, `-m` | Lista/Apaga/Força/Redenomina | `git branch -a` · `git branch -D teste` |
+| `git checkout` | `-b`, `-B` | Cria/troca ou recria branch | `git checkout -b feature/api` |
+| `git switch` | `-c`, `-` | Cria/troca de branch (moderno) | `git switch -c hotfix/x` · `git switch -` |
+
+---
+
+## 🔀 Integração (merge/rebase/cherry-pick)
+
+| Comando | Flags comuns | Para que serve | Exemplo |
+|---|---|---|---|
+| `git merge` | `--no-ff`, `--squash`, `--abort` | Mescla branches | `git merge --no-ff feature/api` |
+| `git rebase` | `-i`, `--onto`, `--continue`, `--abort` | Reaplica commits | `git rebase -i main` |
+| `git cherry-pick <hash>` | `-n`, `-x`, `--continue`, `--abort` | Aplica commit específico | `git cherry-pick -x abc1234` |
+
+---
+
+## ⬆️ Sincronização (fetch/pull/push)
+
+| Comando | Flags comuns | Para que serve | Exemplo |
+|---|---|---|---|
+| `git fetch` | `-p`, `--all`, `--tags` | Baixa refs, limpa remotas | `git fetch -p --all --tags` |
+| `git pull` | `--rebase`, `--ff-only` | Atualiza branch local | `git pull --rebase origin main` |
+| `git push` | `-u`, `--tags`, `--delete`, `--force-with-lease` | Envia commits/tags | `git push -u origin feature/x` · `git push --tags` |
+
+---
+
+## 🔎 Inspeção & Histórico
+
+| Comando | Flags comuns | Para que serve | Exemplo |
+|---|---|---|---|
+| `git log` | `--oneline`, `--graph`, `--decorate`, `-p`, `-n` | Histórico compacto/visual | `git log --oneline --graph --decorate --all` |
+| `git diff` | `-w`, `-b`, `--staged`, `--name-only` | Mostra diferenças | `git diff -w main...feature/x` |
+| `git show <obj>` | `-s`, `--name-only` | Exibe commit/objeto | `git show -s --name-only HEAD` |
+| `git blame <arq>` | `-L <a,b>` | Quem mexeu em cada linha | `git blame -L 10,50 Calc.java` |
+| `git grep <pat>` | `-n`, `-i`, `-e`, `-C <n>`, `-a` | Busca no código | `git grep -ni -C1 -e "TODO"` |
+| `git reflog` | — | Log de referências locais | `git reflog` |
+
+---
+
+## 🧳 Stash & Limpeza
+
+| Comando | Flags comuns | Para que serve | Exemplo |
+|---|---|---|---|
+| `git stash` | `-u`, `-a`, `-p` | Guarda alterações (untracked/all/patch) | `git stash -u -m "WIP"` |
+| `git stash pop/apply` | — | Restaura o stash | `git stash pop` |
+| `git stash list/drop/clear` | — | Lista/Remove/Limpa | `git stash drop` |
+| `git clean` | `-n`, `-f`, `-d`, `-x` | Limpa untracked/ignored | `git clean -n -d` · `git clean -fx` |
+
+---
+
+## ⏪ Recuperação & Reescrita
+
+| Comando | Flags comuns | Para que serve | Exemplo |
+|---|---|---|---|
+| `git reset <ref>` | `--soft`, `--mixed` (padrão), `--hard` | Move HEAD/índice/working | `git reset --soft HEAD~1` |
+| `git revert <hash>` | `-n`, `--no-edit` | Commit que desfaz outro | `git revert --no-edit abc1234` |
+| `git bisect` | `start`, `bad`, `good` | Achar commit que quebrou | `git bisect start; git bisect bad; git bisect good v1.0` |
+
+---
+
+## 🏷️ Tags, Submódulos & Worktrees
+
+| Comando | Flags comuns | Para que serve | Exemplo |
+|---|---|---|---|
+| `git tag` | `-a`, `-d`, `-n` | Cria/mostra/apaga tags | `git tag -a v1.0 -m "release"` |
+| `git push origin <tag>` | `--tags` | Envia tag(s) | `git push --tags` |
+| `git submodule add <url> <path>` | `-b <branch>` | Adiciona submódulo (branch fixa) | `git submodule add -b main <url> libs/lib` |
+| `git submodule update` | `--init`, `--recursive` | Inicializa/atualiza submódulos | `git submodule update --init --recursive` |
+| `git worktree add <dir> <ref>` | `-b <branch>` | Checkout extra em outro dir | `git worktree add -b fix/tmp ../wt-fix HEAD~3` |
+
+---
+
+## 🧠 Notas úteis
+- `git commit -a` **não** inclui arquivos **novos** (use `git add`/`git add -A`).  
+- `git diff -w` ignora **todo** whitespace; `-b` ignora **quantidade** de espaço.  
+- `git push --force-with-lease` é mais seguro que `--force`.  
+- `git reset --hard` apaga alterações não commitadas (cuidado!).  
+- `git switch`/`git restore` são alternativas modernas a `checkout` para fluxos mais claros.
+
+> Dica: para ver a ajuda de um comando/flag, use `git help <comando>` ou `<comando> --help`.
+
+# 🏷️ Git — Significado das Flags 
+
+> Observação: **a mesma flag pode ter significados diferentes dependendo do comando**. Veja as colunas “Em quais comandos” e “Significado prático”.
+
+---
+
+## 🔠 Flags curtas (uma letra, com `-`)
+
+| Flag | Em quais comandos | Significado prático | Exemplo rápido |
+|---|---|---|---|
+| `-a` | `commit`, `branch`, `stash`, `grep`, `diff` | **commit**: inclui todas as alterações de arquivos já rastreados; **branch**: lista todas as branches (locais+remotas); **stash**: guarda tudo (inclui untracked e ignorados); **grep/diff**: trata como texto (mesmo “binário”). | `git commit -a -m "fix"` · `git branch -a` · `git stash -a` |
+| `-A` | `add` | “All”: adiciona **tudo** ao índice (inclui deleções). | `git add -A` |
+| `-b` | `checkout`, `clone`, `status`, `diff`, `submodule add`, `worktree add` | **checkout**: cria/troca para nova branch; **clone**: já clona em uma branch; **status**: mostra nome da branch (com `-s` vira `-sb`); **diff**: ignora diferenças na **quantidade** de espaço; **submodule/worktree**: define branch. | `git checkout -b feature/x` · `git diff -b main...feat` |
+| `-B` | `checkout` | (Re)cria a branch no ponto indicado (sobrescreve se existir). | `git checkout -B feature/x main` |
+| `-c` | `switch` | Cria branch ao trocar (moderno para `checkout -b`). | `git switch -c hotfix/y` |
+| `-d` | `branch`, `tag` | Deleta branch/tag (seguro). | `git branch -d old` · `git tag -d v1.0` |
+| `-D` | `branch` | Deleta branch **forçando** (mesmo sem merge). | `git branch -D old` |
+| `-e` | `grep` | Define explicitamente o **padrão** de busca. | `git grep -e "TODO"` |
+| `-f` | `rm`, `clean`, `push` | Força: **rm/clean** apagam sem perguntar; **push** força envio (⚠️). | `git rm -f a.txt` · `git push -f` |
+| `-i` | `rebase`, `grep`, `add`, `restore` | **rebase** interativo; **grep** case-insensitive; **add/restore** modo patch/iterativo. | `git rebase -i main` · `git grep -i erro` |
+| `-l` | `config` | Lista configs. | `git config -l` |
+| `-m` | `commit`, `branch`, `tag` | **commit**: mensagem; **branch**: renomeia; **tag**: mensagem anotada. | `git commit -m "feat"` · `git branch -m main` |
+| `-n` | `log`, `clean`, `grep`, `revert` | **log**: limita nº de commits; **clean**: “dry-run”; **grep**: mostra nº da linha; **revert**: prepara sem commitar. | `git log -n 5` · `git clean -n` |
+| `-p` | `add`, `restore`, `stash`, `diff` | “patch”: seleciona hunks interativamente. | `git add -p` |
+| `-r` | `rm`, `branch` | **rm** recursivo; **branch -r** lista só remotas. | `git rm -r pasta/` · `git branch -r` |
+| `-s` | `status`, `show` | **status -s**: formato curto; **show -s**: só cabeçalho do commit (sem diff). | `git status -s` · `git show -s` |
+| `-S` | `commit` | Assina commit (GPG/SSH signing). | `git commit -S -m "release"` |
+| `-u` | `push`, `stash`, `branch` | **push**: define upstream; **stash**: inclui **untracked**; **branch -u**: seta upstream. | `git push -u origin feat` · `git stash -u` |
+| `-v` | `remote`, `commit` | **remote -v**: URLs; **commit -v**: mostra diff no editor. | `git remote -v` |
+| `-w` | `diff` | Ignora **todo** whitespace. | `git diff -w` |
+| `-x` | `clean`, `cherry-pick` | **clean** inclui ignorados; **cherry-pick -x**: anota origem na msg. | `git clean -fx` |
+| `-L` | `blame` | Restringe intervalo de linhas. | `git blame -L 10,50 App.java` |
+
+> Dica: `-h` (em muitos comandos) mostra ajuda rápida desse comando específico.
+
+---
+
+## 🧵 Flags longas (com `--`)
+
+| Flag | Comando(s) | Para que serve | Exemplo |
+|---|---|---|---|
+| `--global` | `config` | Configurações a nível de usuário. | `git config --global user.email "x@x.com"` |
+| `--list` | `config` | Lista configs efetivas. | `git config --list` |
+| `--staged` | `diff`, `restore` | Opera no que está **no índice** (staged). | `git diff --staged` |
+| `--cached` | `rm` | Remove **só do índice** (mantém arquivo). | `git rm --cached .env` |
+| `--all` | `fetch`, `log` | **fetch**: todos remotos; **log**: todas as refs. | `git fetch --all` |
+| `--tags` | `fetch`, `push` | Inclui/enviam-se tags. | `git fetch --tags` |
+| `--rebase` | `pull` | Atualiza rebaseando (evita merge commit). | `git pull --rebase origin main` |
+| `--ff-only` | `pull`, `merge` | Só permite fast‑forward (falha se precisar merge). | `git pull --ff-only` |
+| `--no-ff` | `merge` | Força um commit de merge (histórico de PR). | `git merge --no-ff feature/x` |
+| `--squash` | `merge` | Junta mudanças sem commit de merge. | `git merge --squash feature/x` |
+| `--continue` / `--abort` | `rebase`, `merge`, `cherry-pick` | Continua/aborta após conflitos. | `git rebase --continue` |
+| `--onto` | `rebase` | Rebase avançado para outro base-point. | `git rebase --onto main old-base feature` |
+| `--depth 1` | `clone` | Clone raso (histórico mínimo). | `git clone --depth 1 <url>` |
+| `--single-branch` | `clone` | Clona apenas uma branch. | `git clone --single-branch -b main <url>` |
+| `--name-only` | `diff`, `show`, `log` | Mostra só nomes de arquivos alterados. | `git show --name-only` |
+| `--no-edit` | `revert`, `merge` | Usa mensagem padrão (não abre editor). | `git revert --no-edit <hash>` |
+| `--init --recursive` | `submodule update` | Inicializa e atualiza submódulos (aninhados). | `git submodule update --init --recursive` |
+| `--force-with-lease` | `push` | “Force” mais seguro (protege trabalho remoto). | `git push --force-with-lease` |
+
+---
+
+## 📚 Como aprender o significado de uma flag em contexto
+- Ajuda do comando: `git <cmd> -h` ou `git <cmd> --help`  
+- Livro oficial: *Pro Git* (grátis)  
+- Experimente com segurança em um repositório de testes!
+
