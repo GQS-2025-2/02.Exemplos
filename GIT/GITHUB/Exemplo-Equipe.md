@@ -267,7 +267,9 @@ git rebase --continue
 
 
 
-## 📝 Dicas de Git úteis
+## 📝 Dicas Úteis
+### Git
+
 - Status: `git status`  
 - Histórico: `git log --oneline --graph --decorate --all`  
 - Trazer `main` para sua branch (rebase):
@@ -277,3 +279,37 @@ git rebase --continue
   ```
 - Desfazer último commit mantendo alterações: `git reset --soft HEAD~1`  
 - Guardar alterações temporariamente: `git stash` / `git stash pop`
+
+### Atualizar Java para 21 no GitHub Codespaces (Ubuntu/Debian)
+
+Se `java -version` mostrar **Java ≤ 17**, atualize para o **21** seguindo os passos abaixo.
+
+1) Instalar o OpenJDK 21
+```bash
+sudo apt-get update
+sudo apt-get install -y openjdk-21-jdk
+```
+
+2) Definir o 21 como padrão
+```bash
+sudo update-alternatives --list java
+sudo update-alternatives --config java    # escolha o 21
+sudo update-alternatives --list javac
+sudo update-alternatives --config javac   # escolha o 21
+hash -r                                   # limpa cache de comandos do shell
+java -version
+```
+
+3) Definir o `JAVA_HOME`
+(Ajuste o diretório conforme o que houver em `/usr/lib/jvm`)
+```bash
+ls /usr/lib/jvm
+# Exemplo: 'java-21-openjdk-amd64'
+echo 'export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64' >> ~/.bashrc
+echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+java -version
+mvn -v
+```
+
+> 💡 Se estiver usando **zsh**, troque `~/.bashrc` por `~/.zshrc`.
