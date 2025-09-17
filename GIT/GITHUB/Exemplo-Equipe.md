@@ -20,7 +20,28 @@ Cada pessoa implementa uma parte da classe `Calc` em **branches** diferentes, ab
 
 ---
 
-## 🧱 Estrutura do projeto (crie assim no repo)
+## 🔀 Fluxo de trabalho recomendado
+- Uma branch por tarefa: `feature/soma`, `feature/subtracao`, `feature/multiplicacao`  
+- Commits pequenos e mensagens claras (`feat: implementar soma`)  
+- Abrir **PR** e solicitar **review** de pelo menos 1 colega  
+- **Todos editam a MESMA LINHA** do `README.md` (acima) para forçar **conflito**
+
+---
+
+## 👤 Configuração de identidade (cada um, uma única vez)
+```bash
+git config --global user.name "Seu Nome"
+git config --global user.email "seu.email@exemplo.com"
+```
+---
+
+## 👩‍💻👨‍💻 Passo a passo por pessoa
+
+> Substitua `<sua-org>`/`<seu-usuario>` conforme sua hospedagem.
+
+### Pessoa A — Setup
+1. Crie o repositório `git-equipe-java` e adicione B e C como *collaborators*.
+2. Defina a estrutura do repo:
 ```
 git-equipe-java/
 ├─ README.md
@@ -28,15 +49,12 @@ git-equipe-java/
 └─ src
    └─ main
       └─ java
-         └─ com
-            └─ exemplo
-               └─ equipe
-                  ├─ Calc.java
-                  └─ Main.java
+         └─ equipe
+            ├─ Calc.java
+            └─ Main.java
 ```
 
----
-
+3. Suba o código base.
 ## 🧩 Código base (cole nos arquivos correspondentes)
 
 **README.md** (este arquivo — mantenha a linha abaixo para gerar conflito)  
@@ -113,54 +131,52 @@ public class Main {
 
 > Suba o esqueleto **com os métodos “errados”** (retornando 0). Cada pessoa corrige a sua parte.
 
----
 
-## 🔀 Fluxo de trabalho recomendado
-- Uma branch por tarefa: `feature/soma`, `feature/subtracao`, `feature/multiplicacao`  
-- Commits pequenos e mensagens claras (`feat: implementar soma`)  
-- Abrir **PR** e solicitar **review** de pelo menos 1 colega  
-- **Todos editam a MESMA LINHA** do `README.md` (acima) para forçar **conflito**
-
----
-
-## 👤 Configuração de identidade (cada um, uma única vez)
+4. Envie para o repo
+   ```bash
+   git add .
+   git commit -m "código base"
+   git push -u origin feature/soma
+   ```
+   
+## 🧪 Como rodar
 ```bash
-git config --global user.name "Seu Nome"
-git config --global user.email "seu.email@exemplo.com"
+mvn -q -DskipTests package
+java -cp target/git-equipe-java-1.0.0.jar equipe.Main
+```
+
+Saída esperada ao final (com tudo implementado):
+```
+2 + 3 = 5
+3 - 2 = 1
+2 * 3 = 6
 ```
 
 ---
-
-## 👩‍💻👨‍💻 Passo a passo por pessoa
-
-> Substitua `<sua-org>`/`<seu-usuario>` conforme sua hospedagem.
-
-### Pessoa A — Setup + **soma**
-1. Crie o repositório `git-equipe-java` e adicione B e C como *collaborators*.  
-2. Suba o código base.
-3. Crie a branch:
+### Pessoa A — **soma**
+6. Crie a branch:
    ```bash
    git checkout -b feature/soma
    ```
-4. Implemente a soma em `Calc.java`:
+7. Implemente a soma em `Calc.java`:
    ```java
    public int soma(int a, int b) { return a + b; }
    ```
-5. Edite **a linha do README** (a mesma de todos), ex.:
+8. Edite **a linha do README** (a mesma de todos), ex.:
    ```
-   Linha da equipe (edite ESTA MESMA LINHA para criar conflito): Equipe = [Ana]
+   Linha da equipe (edite ESTA MESMA LINHA para criar conflito): Equipe = [seu-nome]
    ```
-6. Teste e envie:
+9. Teste e envie:
    ```bash
    mvn -q -DskipTests package
-   java -cp target/git-equipe-java-1.0.0.jar com.exemplo.equipe.Main
+   java -cp target/git-equipe-java-1.0.0.jar equipe.Main
 
    git add .
    git commit -m "feat: implementar soma e atualizar equipe"
    git push -u origin feature/soma
    ```
-7. Abra o **PR** `feature/soma` → `main`, peça review de B e C e faça **merge**.  
-8. Atualize sua `main`:
+10. Abra o **PR** `feature/soma` → `main`, peça review de B e C e faça **merge**.  
+11. Atualize sua `main`:
    ```bash
    git checkout main
    git pull origin main
@@ -177,7 +193,7 @@ git config --global user.email "seu.email@exemplo.com"
    ```
 3. Edite **a mesma linha** do README:
    ```
-   ... Equipe = [Bruno]
+   ... Equipe = [seu-nome]
    ```
 4. Traga a `main` para sua branch (se A já mesclou):
    ```bash
@@ -188,7 +204,7 @@ git config --global user.email "seu.email@exemplo.com"
 5. Teste, commit e push; abra **PR** e faça **merge** após review:
    ```bash
    mvn -q -DskipTests package
-   java -cp target/git-equipe-java-1.0.0.jar com.exemplo.equipe.Main
+   java -cp target/git-equipe-java-1.0.0.jar equipe.Main
 
    git add .
    git commit -m "feat: implementar subtracao e atualizar equipe"
@@ -206,7 +222,7 @@ git config --global user.email "seu.email@exemplo.com"
    ```
 3. Edite **a mesma linha** do README:
    ```
-   ... Equipe = [Carla]
+   ... Equipe = [seu-nome]
    ```
 4. Puxe a `main` (deve gerar conflito se PRs anteriores já foram mesclados):
    ```bash
@@ -216,7 +232,7 @@ git config --global user.email "seu.email@exemplo.com"
 5. **Resolva o conflito** e conclua o rebase (instruções abaixo), depois:
    ```bash
    mvn -q -DskipTests package
-   java -cp target/git-equipe-java-1.0.0.jar com.exemplo.equipe.Main
+   java -cp target/git-equipe-java-1.0.0.jar equipe.Main
 
    git push -u origin feature/multiplicacao
    ```
@@ -228,15 +244,15 @@ git config --global user.email "seu.email@exemplo.com"
 Ao conflitar, o arquivo mostrará algo como:
 ```diff
 <<<<<<< HEAD
-Linha da equipe (edite ESTA MESMA LINHA para criar conflito): Equipe = [Ana]
+Linha da equipe (edite ESTA MESMA LINHA para criar conflito): Equipe = [A]
 =======
-Linha da equipe (edite ESTA MESMA LINHA para criar conflito): Equipe = [Bruno]
+Linha da equipe (edite ESTA MESMA LINHA para criar conflito): Equipe = [B]
 >>>>>>> feature/subtracao
 ```
 
 Edite para uma versão combinada:
 ```markdown
-Linha da equipe (edite ESTA MESMA LINHA para criar conflito): Equipe = [Ana, Bruno, Carla]
+Linha da equipe (edite ESTA MESMA LINHA para criar conflito): Equipe = [A, B, C]
 ```
 
 Depois:
@@ -249,20 +265,7 @@ git rebase --continue
 
 ---
 
-## 🧪 Como rodar
-```bash
-mvn -q -DskipTests package
-java -cp target/git-equipe-java-1.0.0.jar com.exemplo.equipe.Main
-```
 
-Saída esperada ao final (com tudo implementado):
-```
-2 + 3 = 5
-3 - 2 = 1
-2 * 3 = 6
-```
-
----
 
 ## 📝 Dicas de Git úteis
 - Status: `git status`  
