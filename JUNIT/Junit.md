@@ -565,7 +565,7 @@ class LivroTest {
     void marcarIndisponivelDuasVezes() {
         Livro l = new Livro("Refactoring");
         l.marcarIndisponivel();
-        assertThrows(IllegalStateException.class, l::marcarIndisponivel);
+        assertThrows(IllegalStateException.class, () -> l.marcarIndisponivel());
     }
 }
 ```
