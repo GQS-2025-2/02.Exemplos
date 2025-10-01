@@ -68,6 +68,34 @@ No contexto de uma **biblioteca**, podemos ter regras como:
 - A data de devolução não pode ser anterior à data de empréstimo.
 
 ---
+## Estrutura Maven 
+
+biblioteca-domain/
+│── pom.xml                     # Arquivo de configuração Maven
+│
+├── src/
+│   ├── main/                   # Código de produção
+│   │   └── java/
+│   │       └── com/
+│   │           └── example/
+│   │               └── biblioteca/
+│   │                   ├── Livro.java
+│   │                   ├── Usuario.java
+│   │                   └── Emprestimo.java
+│   │
+│   └── resources/              # Arquivos de configuração (se houver)
+│
+└── src/
+    └── test/                   # Código de testes unitários
+        ├── java/
+        │   └── com/
+        │       └── example/
+        │           └── biblioteca/
+        │               ├── LivroTest.java
+        │               ├── UsuarioTest.java
+        │               └── EmprestimoTest.java
+        │
+        └── resources/          # Configurações específicas de teste (se houver)
 
 ## Código de Produção
 
