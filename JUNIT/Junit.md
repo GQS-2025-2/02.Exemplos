@@ -69,8 +69,8 @@ No contexto de uma **biblioteca**, podemos ter regras como:
 
 ---
 ## Estrutura Maven 
-
-biblioteca-domain/
+```bash
+biblioteca/
 │── pom.xml                     # Arquivo de configuração Maven
 │
 ├── src/
@@ -96,7 +96,7 @@ biblioteca-domain/
         │               └── EmprestimoTest.java
         │
         └── resources/          # Configurações específicas de teste (se houver)
-
+```
 ## Código de Produção
 
 **Pacote:** `com.example.biblioteca`
